@@ -10,7 +10,7 @@
   apt:
     name: apache2
 
-- name: Copy the code from the repository
+- name: Copy the src from the repository
   git: repo=https://github.com/brikis98/php-app.git dest=/var/www/html/app
 
 - name: Start Apache

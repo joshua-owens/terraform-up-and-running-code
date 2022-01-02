@@ -13,11 +13,12 @@ import (
 
 const dbDirProd = "../live/prod/data-stores/mysql"
 const appDirProd = "../live/prod/services/hello-world-app"
+
 // Replace these with the proper paths to your modules
 const dbDirStage = "../live/stage/data-stores/mysql"
 const appDirStage = "../live/stage/services/hello-world-app"
 
-func TestHelloWorldAppStage(t *testing.T)  {
+func TestHelloWorldAppStage(t *testing.T) {
 	t.Parallel()
 
 	// Deploy the MySQL DB
@@ -46,15 +47,15 @@ func createDbOpts(t *testing.T, terraformDir string) *terraform.Options {
 		TerraformDir: terraformDir,
 
 		Vars: map[string]interface{}{
-			"db_name": fmt.Sprintf("test%s", uniqueId),
+			"db_name":     fmt.Sprintf("test%s", uniqueId),
 			"db_password": "password",
 		},
 
 		BackendConfig: map[string]interface{}{
-			"bucket":         bucketForTesting,
-			"region":         bucketRegionForTesting,
-			"key":            dbStateKey,
-			"encrypt":        true,
+			"bucket":  bucketForTesting,
+			"region":  bucketRegionForTesting,
+			"key":     dbStateKey,
+			"encrypt": true,
 		},
 	}
 }
@@ -68,13 +69,13 @@ func createHelloOpts(
 
 		Vars: map[string]interface{}{
 			"db_remote_state_bucket": dbOpts.BackendConfig["bucket"],
-			"db_remote_state_key": dbOpts.BackendConfig["key"],
-			"environment": dbOpts.Vars["db_name"],
+			"db_remote_state_key":    dbOpts.BackendConfig["key"],
+			"environment":            dbOpts.Vars["db_name"],
 		},
 
 		// Retry up to 3 times, with 5 seconds between retries,
 		// on known errors
-		MaxRetries: 3,
+		MaxRetries:         3,
 		TimeBetweenRetries: 5 * time.Second,
 		RetryableTerraformErrors: map[string]string{
 			"RequestError: send request failed": "Throttling issue?",
@@ -105,7 +106,7 @@ func TestHelloWorldAppStageWithStages(t *testing.T) {
 	t.Parallel()
 
 	// Store the function in a short variable name solely to make the
-	// code examples fit better in the book.
+	// src examples fit better in the book.
 	stage := test_structure.RunTestStage
 
 	// Deploy the MySQL DB
@@ -154,7 +155,7 @@ func deployApp(t *testing.T, dbDir string, helloAppDir string) {
 	terraform.InitAndApply(t, helloOpts)
 }
 
-func validateApp(t *testing.T, helloAppDir string)  {
+func validateApp(t *testing.T, helloAppDir string) {
 	helloOpts := test_structure.LoadTerraformOptions(t, helloAppDir)
 	validateHelloApp(t, helloOpts)
 }
@@ -198,7 +199,7 @@ func redeployApp(t *testing.T, helloAppDir string) {
 	waitGroup.Wait()
 }
 
-func TestHelloWorldAppProdWithStages(t *testing.T)  {
+func TestHelloWorldAppProdWithStages(t *testing.T) {
 	t.Parallel()
 
 	// Deploy the MySQL DB
