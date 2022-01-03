@@ -34,6 +34,6 @@ resource "aws_dynamodb_table" "terraform_locks" {
 
 #terraform {
 #  backend "s3" {
-#    key = "global/s3/terraform.tfstate"
+#    key = var.bucket_name
 #  }
 #}
