@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "terraform_state" {
   bucket = "jowens-terraform-remote-state"
 
   lifecycle {
-    prevent_destroy = true
+#    prevent_destroy = true
   }
 
   versioning {
@@ -32,11 +32,11 @@ resource "aws_dynamodb_table" "terraform_locks" {
   }
 }
 
-terraform {
-  backend "s3" {
-    key = "global/s3/terraform.tfstate"
-  }
-}
+#terraform {
+#  backend "s3" {
+#    key = "global/s3/terraform.tfstate"
+#  }
+#}
 
 output "s3_bucket_arn" {
   value = aws_s3_bucket.terraform_state.arn
