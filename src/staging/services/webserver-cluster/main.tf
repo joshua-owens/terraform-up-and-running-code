@@ -134,3 +134,8 @@ resource "aws_lb_listener_rule" "asg" {
     }
   }
 }
+terraform {
+  backend "s3" {
+    key = var.bucket_name
+  }
+}
