@@ -3,7 +3,8 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "jowens-terraform-remote-state"
+  bucket        = var.bucket_name
+  force_destroy = true
 
   lifecycle {
     #    prevent_destroy = true
@@ -32,8 +33,8 @@ resource "aws_dynamodb_table" "terraform_locks" {
   }
 }
 
-#terraform {
-#  backend "s3" {
-#    key = var.bucket_name
-#  }
-#}
+terraform {
+  backend "s3" {
+    key = "global/s3/terraform.tfstate"
+  }
+}

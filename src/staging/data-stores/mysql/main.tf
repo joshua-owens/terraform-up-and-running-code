@@ -12,3 +12,4 @@ resource "aws_db_instance" "example" {
   username            = "admin"
   password            = var.db_password
 }
+
