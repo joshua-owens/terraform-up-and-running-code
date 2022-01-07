@@ -13,3 +13,12 @@ resource "aws_db_instance" "example" {
   password            = var.db_password
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "jowens-terraform-up-and-running-state"
+    key            = "staging/data-stores/mysql/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "jowens-terraform-state-locks"
+    encrypt        = true
+  }
+}

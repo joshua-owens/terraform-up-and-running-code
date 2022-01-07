@@ -134,6 +134,17 @@ resource "aws_lb_listener_rule" "asg" {
     }
   }
 }
+
+data "terraform_remote_state" "db" {
+  backend = "s3"
+  config = {
+    bucket = "jowens-terraform-up-and-running-state"
+    key    = "staging/data-stores/mysql/terraform.tfstate"
+    region = "us-east-2"
+
+  }
+}
+
 terraform {
   backend "s3" {
     key = "staging/webserver-cluster/terraform.tfstate"
