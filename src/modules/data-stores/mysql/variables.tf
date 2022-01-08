@@ -8,3 +8,13 @@ variable "bucket_name" {
   description = "The s3 bucket name to store state in"
   type        = string
 }
+
+variable "db_name" {
+  description = "The name of the database"
+  type        = string
+}
+
+variable "db_identifier_prefix" {
+  description = "The identifier prefix for the database"
+  type        = string
+}
