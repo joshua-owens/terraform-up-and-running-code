@@ -1,3 +1,11 @@
+locals {
+  http_port    = 80
+  any_port     = 0
+  any_protocol = "-1"
+  tcp_protocol = "tcp"
+  all_ips      = ["0.0.0.0/0"]
+}
+
 variable "bucket_name" {
   default     = "jowens-terraform-up-and-running-state"
   description = "The S3 bucket name to store state file in."

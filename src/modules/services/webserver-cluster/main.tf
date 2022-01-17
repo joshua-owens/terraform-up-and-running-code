@@ -17,9 +17,16 @@ resource "aws_security_group" "instance" {
 
   ingress {
     from_port   = var.server_port
-    protocol    = "tcp"
+    protocol    = local.tcp_protocol
     to_port     = var.server_port
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = local.all_ips
+  }
+
+  egress {
+    from_port   = local.any_port
+    to_port     = local.http_port
+    protocol    = local.any_protocol
+    cidr_blocks = local.all_ips
   }
 }
 
@@ -107,7 +114,7 @@ resource "aws_lb" "example" {
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.example.arn
-  port              = 80
+  port              = local.http_port
   protocol          = "HTTP"
 
   default_action {
