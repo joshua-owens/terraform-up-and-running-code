@@ -149,6 +149,7 @@ resource "aws_lb_listener_rule" "asg" {
       values = ["*"]
     }
   }
+
 }
 
 data "terraform_remote_state" "db" {
