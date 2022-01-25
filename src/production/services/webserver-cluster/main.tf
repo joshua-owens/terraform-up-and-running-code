@@ -28,6 +28,11 @@ module "webserver_cluster" {
   cluster_name           = "webserver-production"
   db_remote_state_bucket = "jowens-terraform-up-and-running-state"
   db_remote_state_key    = "production/data-stores/mysql/terraform.tfstate"
+
+  custom_tags = {
+    Owner      = "team-foo"
+    DeployedBy = "terraform"
+  }
 }
 
 terraform {
