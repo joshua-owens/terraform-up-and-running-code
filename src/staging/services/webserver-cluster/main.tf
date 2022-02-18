@@ -17,6 +17,7 @@ module "webserver_cluster" {
   cluster_name           = "webserver-staging"
   db_remote_state_bucket = "jowens-terraform-up-and-running-state"
   db_remote_state_key    = "staging/data-stores/mysql/terraform.tfstate"
+  enable_autoscaling     = false
 }
 
 terraform {
