@@ -10,5 +10,5 @@ output "alb_dns_name" {
 
 output "alb_security_group_id" {
   value       = aws_security_group.alb.id
-  description = module.webserver_cluster.alb_security_group_id
+  description = "The ALB security group ID"
 }
