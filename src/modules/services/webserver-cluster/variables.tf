@@ -37,3 +37,10 @@ variable "enable_autoscaling" {
   description = "IF set to true, enable auto scaling"
   type        = bool
 }
+
+variable "instance_type" {
+  description = "AWS EC2 Instance Type"
+  type        = string
+  default     = "t2.micro"
+}
+
